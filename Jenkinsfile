@@ -28,7 +28,9 @@ pipeline {
 			}
 		}
 		stage('Publish docker image') {
-			sh 'echo "not implemented"'
+			steps {
+				sh 'echo "not implemented"'
+			}
 		}
     }
 } 
