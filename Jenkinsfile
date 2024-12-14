@@ -1,18 +1,21 @@
 pipeline {
 	agent any
-	tools {
-		git 'Default'
-	}
 	environment {
 		CREDENTIALS = credentials('dkr0')
 		DOCKER_IMG = 'zdev19/z3-server:latest'
 	}
 	stages {
-		stage('checkout code') {
-			steps {
-				git branch: 'main', credentialsId: 'gh-tkn', url: 'https://github.com/Z3DRP/z3-server.git'
-			}
-		}
+        stage('Checkout Code') {
+            steps {
+                script {
+                    try {
+                        checkout scm
+                    } catch (e) {
+                        echo "Error: ${e}"
+                        sh 'cat /var/jenkins_home/workspace/portfolio-fileserver-deployment@tmp/git-log.log'
+                    }
+                }
+            }
 		stage('build img') {
 			steps {
 				sh 'docker --version'
