@@ -5,13 +5,13 @@ pipeline {
 		DOCKER_IMG = 'zdev19/z3-server:latest'
 	}
 	stages {
-        stage('Checkout Code') {
+        stage('Checkout Code te') {
             steps {
                 script {
                     try {
                         checkout scm
                     } catch (e) {
-                        echo "Error: ${e}"
+                        echo "Error ad: ${e}"
                         sh 'cat /var/jenkins_home/workspace/portfolio-fileserver-deployment@tmp/git-log.log'
                     }
                 }
