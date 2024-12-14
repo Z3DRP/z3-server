@@ -5,6 +5,11 @@ pipeline {
 		DOCKER_IMG = 'zdev19/z3-server:latest'
 	}
 	stages {
+		stage('checkout code') {
+			steps {
+				git branch: 'main', credentialsId: 'gh-tkn', url: 'https://github.com/Z3DRP/z3-server.git'
+			}
+		}
 		stage('build img') {
 			steps {
 				sh 'docker --version'
