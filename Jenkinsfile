@@ -6,18 +6,20 @@ pipeline {
 		DOCKER_IMG = 'zdev19/z3-server:latest'
 	}
 	stages {
-        steps {
-			checkout([
-				$class: 'GitSCM',
-				branches: [[name: '*/main']], // Ensure the branch is correct
-				doGenerateSubmoduleConfigurations: false,
-				extensions: [],
-				userRemoteConfigs: [[
-					url: 'https://github.com/Z3DRP/z3-server.git',
-					credentialsId: GIT_CREDENTIALS
-				]]
-			])
-        }
+		stage('checkout') {
+			steps {
+				checkout([
+					$class: 'GitSCM',
+					branches: [[name: '*/main']], // Ensure the branch is correct
+					doGenerateSubmoduleConfigurations: false,
+					extensions: [],
+					userRemoteConfigs: [[
+						url: 'https://github.com/Z3DRP/z3-server.git',
+						credentialsId: GIT_CREDENTIALS
+					]]
+				])
+			}
+		}
 		stage('build img') {
 			steps {
 				sh 'docker --version'
