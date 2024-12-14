@@ -7,6 +7,7 @@ pipeline {
 	stages {
 		stage('build img') {
 			steps {
+				sh 'docker --version'
 				sh 'docker build --platform=linux/amd64 -t zdev19/z3-server:latest .'
 			}
 		}
