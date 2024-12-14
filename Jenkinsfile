@@ -2,19 +2,21 @@ pipeline {
 	agent any
 	environment {
 		CREDENTIALS = credentials('dkr0')
+		GIT_CREDENTIALS = 'gh-tkn' // Replace with your credential ID
 		DOCKER_IMG = 'zdev19/z3-server:latest'
 	}
 	stages {
-        stage('Checkout Code te') {
             steps {
-                script {
-                    try {
-                        checkout scm
-                    } catch (e) {
-                        echo "Error ad: ${e}"
-                        sh 'cat /var/jenkins_home/workspace/portfolio-fileserver-deployment@tmp/git-log.log'
-                    }
-                }
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: '*/main']], // Ensure the branch is correct
+                    doGenerateSubmoduleConfigurations: false,
+                    extensions: [],
+                    userRemoteConfigs: [[
+                        url: 'https://github.com/Z3DRP/z3-server.git',
+                        credentialsId: GIT_CREDENTIALS
+                    ]]
+                ])
             }
 		stage('build img') {
 			steps {
