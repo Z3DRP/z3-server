@@ -20,9 +20,11 @@ pipeline {
             }
         }
 		stage('Build docker image for ubunut arch amd64') {
-			sh 'docker --version'
-			script {
-				docker.build("${IMG}", "--platform=linux/amd64 .")
+			steps {
+				sh 'docker --version'
+				script {
+					docker.build("${IMG}", "--platform=linux/amd64 .")
+				}
 			}
 		}
 		stage('Publish docker image') {
