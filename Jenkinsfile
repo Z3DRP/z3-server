@@ -1,5 +1,8 @@
 pipeline {
 	agent any
+	tools {
+		git 'Default'
+	}
 	environment {
 		CREDENTIALS = credentials('dkr0')
 		DOCKER_IMG = 'zdev19/z3-server:latest'
