@@ -26,7 +26,7 @@ pipeline {
 			sh 'docker logout'
 		}
 		success {
-			echo 'Docker image pushed to repo'
+			echo 'Image built and pushed successfully'
 		}
 		failure {
 			echo 'Failed to build or push image'
