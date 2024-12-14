@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
         GIT_CREDENTIALS = 'gh-tkn' // Replace with your credential ID
+		IMG = 'zdev19/z3-server:latest'
     }
     stages {
         stage('Checkout Code') {
@@ -18,5 +19,14 @@ pipeline {
                 ])
             }
         }
+		stage('Build docker image for ubunut arch amd64') {
+			sh 'docker --version'
+			script {
+				docker.build("${IMG}", "--platform=linux/amd64 .")
+			}
+		}
+		stage('Publish docker image') {
+			sh 'echo "not implemented"'
+		}
     }
 } 
