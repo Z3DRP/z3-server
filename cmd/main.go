@@ -10,7 +10,7 @@ func main() {
 
 	http.Handle("/", fs)
 
-	log.Println("Starting portfolio server..")
+	log.Println("server app..")
 	if err := http.ListenAndServe(":3000", nil); err != nil {
 		log.Fatal(err)
 	}
