@@ -22,8 +22,10 @@ def build_and_push(usrname, pwd):
         push_logs = client.image.push(repo, tag=TAG)
         print(push_logs)
         print("Image pushed usccessfully")
+        sys.exit(0)
     except Exception as e:
         print(f"Error: {e}")
+        sys.exit(1)
 
 
 if __name__ == "__main__":
